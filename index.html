@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Bebe ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+:root{--pink:#f5b1cb;--rose:#d875a0;--deep:#a9537d;--text:#744a60}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--text);font-family:'DM Sans',sans-serif;background:radial-gradient(ellipse at top left,#ffe1ed,transparent 48%),radial-gradient(ellipse at bottom right,#eae0ff,transparent 48%),#fffafc;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+#musicButton{position:fixed;z-index:30;top:15px;right:15px;border:1px solid #f4d2e1;border-radius:50px;background:#ffffffed;color:var(--deep);padding:10px 14px;font-size:12px}
+.page{display:none;min-height:100svh;padding:75px 17px 35px;align-items:center;justify-content:center;text-align:center;position:relative;z-index:1}
+.page.active{display:flex;animation:enter .6s ease both}
+.card{width:min(100%,460px);padding:30px 23px;border:1px solid white;border-radius:30px;background:#ffffffdf;box-shadow:0 18px 60px #bd7d9920;backdrop-filter:blur(12px)}
+.bow{color:var(--rose);font-size:27px;letter-spacing:5px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#bf7c9d;font-weight:700}
+h1,h2{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+h1{font-size:clamp(34px,9vw,46px);line-height:1.17;margin:15px 0}
+h2{font-size:28px;margin:12px 0}
+p{font-size:14px;line-height:1.9}
+.small{font-size:11px;color:#b48ca1}
+.sticker{font-size:55px;margin:20px 0;animation:bob 3s ease-in-out infinite}
+.btn{border:0;border-radius:50px;padding:13px 18px;font-size:13px;font-weight:700;margin:5px;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.primary{background:linear-gradient(135deg,#f1a7c4,#d778a3);color:white;box-shadow:0 8px 22px #e8b4cb70}
+.secondary{background:#fff0f6;color:#a65f83;border:1px solid #f6d9e6}
+.envelope{width:142px;height:102px;margin:30px auto;background:#f4b1cd;border-radius:9px;position:relative;box-shadow:0 12px 26px #e5a8c655;cursor:pointer}
+.envelope:before{content:"";position:absolute;inset:0;background:#f9c9dd;clip-path:polygon(0 0,100% 0,50% 65%)}
+.envelope:after{content:"♥";position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);color:white;font-size:30px}
+.button-area{position:relative;width:100%;max-width:340px;height:145px;margin:20px auto;display:flex;align-items:center;justify-content:center;gap:10px}
+#noBtn,#spicyYes{position:relative;z-index:3;white-space:nowrap}
+.letter{background:#fff7fb;border:1px dashed #eab3cc;border-radius:18px;padding:20px;margin:22px 0;text-align:left}
+.letter p{margin:0 0 14px}
+.signature{text-align:right;font:italic 19px 'Playfair Display',Georgia,serif;color:var(--rose)}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:23px 0}
+.polaroid{padding:8px 8px 13px;background:white;border-radius:5px;box-shadow:0 5px 17px #b87b981c;transform:rotate(-2deg)}
+.polaroid:nth-child(even){transform:rotate(2deg)}
+.polaroid img{display:block;width:100%;aspect-ratio:4/4.5;object-fit:cover;background:#fbe6ef;border-radius:3px}
+.polaroid p{font:italic 13px 'Playfair Display',Georgia,serif;margin:10px 0 0}
+.note{display:none;margin-top:20px;padding:20px;border-radius:18px;background:linear-gradient(145deg,#fff0f7,#f1eaff)}
+.note.show{display:block;animation:enter .5s ease}
+.secret-reward{margin-top:22px;padding:18px 12px;border:1px dashed #e8a2c0;border-radius:20px;background:linear-gradient(145deg,#fff0f7,#f1eaff)}
+.reward-kiss{font-size:40px;animation:bob 1.3s infinite}
+#rewardMessage,#spicyResult{display:none}
+#rewardMessage.show,#spicyResult.show{display:block;animation:enter .6s ease}
+.back{background:none;border:none;color:#b17b98;text-decoration:underline;font-size:12px;margin-top:16px}
+.confetti{position:fixed;top:-25px;z-index:20;pointer-events:none;animation:fall 3.5s linear forwards}
+.floating{position:fixed;bottom:-35px;z-index:0;pointer-events:none;color:#e99bbd;opacity:.65;animation:floatUp linear forwards}
+@keyframes enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bob{50%{transform:translateY(-6px) rotate(3deg)}}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}
+@keyframes fall{to{transform:translateY(110vh) rotate(650deg);opacity:0}}
+@media(max-width:370px){.card{padding:25px 15px}.btn{padding:12px 14px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+
+<button id="musicButton" onclick="toggleMusic()">♫ Play our song</button>
+<audio id="ourSong" src="song.mp3" loop preload="none"></audio>
+
+<!-- PAGE 1: ENVELOPE -->
+<section class="page active" id="page1">
+<div class="card">
+<div class="bow">୨୧</div>
+<div class="eyebrow">a little secret for you</div>
+<div class="sticker">💌</div>
+<h1>Hi, my bebe.</h1>
+<p>I made a tiny corner of the internet just for my favorite boy.</p>
+<div class="envelope" onclick="openPage('page2')" role="button" tabindex="0" aria-label="Open letter"></div>
+<button class="btn primary" onclick="openPage('page2')">Open your letter ♡</button>
+<p class="small">made by your lingling, with love and kisses hehe</p>
+</div>
+</section>
+
+<!-- PAGE 2: YES OR NO -->
+<section class="page" id="page2">
+<div class="card">
+<div class="bow">♡ ୨୧ ♡</div>
+<div class="eyebrow">answer honestly, pogi</div>
+<div class="sticker">🥺💗</div>
+<h1>Do you want to see me, bebe?</h1>
+<p>Someone here is already imagining all the hugs she's going to give you.</p>
+<div class="button-area" id="buttonArea">
+<button class="btn primary" id="yesBtn" onclick="sayYes()">YES, OF COURSE! ♡</button>
+<button class="btn secondary" id="noBtn">No 🙈</button>
+</div>
+<p class="small" id="tease">choose wisely, my love hehe</p>
+</div>
+</section>
+
+<!-- PAGE 3: LOVE LETTER -->
+<section class="page" id="page3">
+<div class="card">
+<div class="bow">୨୧ ˚₊‧</div>
+<div class="eyebrow">i knew it, lingling</div>
+<div class="sticker">🥹💗🎀</div>
+<h1>YAYYYY!</h1>
+<p>I KNEW YOU'D CHOOSE ME, darling.<br><strong>Now come collect your kisses.</strong></p>
+<div class="letter">
+<p>To my sweetest bebe linggg, ♡</p>
+<p>I wanted to make something special for you because you make me happy in so many little ways. Sometimes I don't even know how to explain just how much you mean to me huhu, kainis.</p>
+<p>Thank you for being so patient, sweet, and genuine with me. Thank you for making me feel cared for, for giving me reasons to smile, and for making ordinary moments feel special.</p>
+<p>I want more random chika, more laughter, more dates, more hugs, and more little memories with you. I hope I make you feel just as loved as you make me feel, because you deserve that and so much more.</p>
+<p>If I could choose one place to be right now, it would be wherever I could hold you close.</p>
+<div class="signature">your lingling, always ♡</div>
+</div>
+<button class="btn primary" onclick="openPage('page4')">Look at our little memories, bebe</button>
+</div>
+</section>
+
+<!-- PAGE 4: PHOTO GALLERY -->
+<section class="page" id="page4">
+<div class="card">
+<div class="bow">♡ ୨୧ ♡</div>
+<div class="eyebrow">my favorite memories</div>
+<h2>Little pieces of us.</h2>
+<p>Every picture holds a little moment that makes me happy to have you.</p>
+<div class="gallery">
+<div class="polaroid"><img src="photo1.jpg" alt="Our first memory"><p>my favorite person ♡</p></div>
+<div class="polaroid"><img src="photo2.jpg" alt="A sweet moment"><p>you make me smile</p></div>
+<div class="polaroid"><img src="photo3.jpg" alt="A memory I treasure"><p>one for the memories</p></div>
+<div class="polaroid"><div style="aspect-ratio:4/4.5;display:grid;place-items:center;background:#fff0f6;font-size:48px">💌</div><p>many more with you</p></div>
+</div>
+<p class="small">a few pictures, a million feelings.</p>
+<button class="btn primary" onclick="openPage('page5')">One last thing, baby... ♡</button>
+</div>
+</section>
+
+<!-- PAGE 5: VIRTUAL HUG AND REWARD -->
+<section class="page" id="page5">
+<div class="card">
+<div class="bow">୨୧ ♡ ୨୧</div>
+<div class="eyebrow">open whenever you miss me</div>
+<div class="sticker">🫂</div>
+<h1>A hug from your girl.</h1>
+<p>Imagine me wrapping my arms around you, holding you close, and giving you little kisses while telling you how much I love you.</p>
+<button class="btn primary" onclick="giveHug()">Send me a virtual hug ♡</button>
+<div class="note" id="hugNote">
+<div class="sticker">🤍🫂🤍</div>
+<h2>You're being hugged!</h2>
+<p>Come here, lingling. No rushing away from this one. Just stay in my arms for a little while. You don't have to do anything or say anything. I just want you to feel loved.</p>
+<p>If I were there, yayakapin kita ng mahigpit tapos yakap narin sa leeg and probably refuse to let go for a bit HAHAHAHAAHA eme. I love youuuuuu, my lingling. ♡</p>
+<div class="signature">kisses from your baby 🎀</div>
+</div>
+
+<div class="secret-reward">
+<div class="bow">for my lingling ♡</div>
+<div class="reward-kiss"></div>
+<h2>psst... one more thing, pogi.</h2>
+<p>You've received your virtual hug, but do you really think that's all your lingling has for you</p>
+<button class="btn primary" id="rewardButton" onclick="unlockReward()">Unlock your reward</button>
+<div id="rewardMessage">
+<div class="sticker">💋🎀💗</div>
+<h2>Come a little closer, lingling...</h2>
+<p>First, I'd pull you into a really tight hug, wrap my arms around you, and give you the sweetest kiss.<br><br>Then I'd look at you, smile like I didn't just make you forget what you were about to say, and whisper...<br><br><strong>"You know you're getting extra kisses the next time I see you, right, pogi?" 🤭</strong><br><br>And if you ask for more, well... you'll just have to come closer and find out. ♡</p>
+<div class="signature">your very clingy lingling heehjsbe</div>
+</div>
+</div>
+
+<button class="btn secondary" onclick="openPage('page6')">One last question, lingling</button>
+<br>
+<button class="back" onclick="openPage('page1')">Start again, pogi.</button>
+<p class="small">you are loved more than you know. ♡</p>
+</div>
+</section>
+
+<!-- PAGE 6: SPICY QUESTION -->
+<section class="page" id="page6">
+<div class="card">
+<div class="bow">୨୧ ♡ ୨୧</div>
+<div class="eyebrow">a little question for my bebe</div>
+<div class="sticker">💋</div>
+<h1>One question, pogi...</h1>
+<p>u want some sexxx kasi gusto q</p>
+<p class="small">be honest with your lingling, goshhh.</p>
+<div class="button-area" id="spicyArea">
+<button class="btn primary" id="spicyYes" type="button">YES 💋</button>
+<button class="btn secondary" id="spicyNo" type="button">NO 🙈</button>
+</div>
+<p id="spicyTease" class="small">choose wisely, baby. 🤭</p>
+<div class="note" id="spicyResult">
+<div class="sticker">💋❤️‍🔥</div>
+<h2>HAHAHAHA I KNEW IT! 😭</h2>
+<p>OHHH? naurrr. Come here, pogi. You owe your lingling a kiss first. 💋</p>
+<p class="small">Only if we both want to, ILOVEYOUUUU pero g naman ♡</p>
+</div>
+<button class="back" onclick="openPage('page5')">Go back, baby ♡</button>
+</div>
+</section>
+
+<script>
+const pages=document.querySelectorAll(".page");
+const noBtn=document.getElementById("noBtn");
+const buttonArea=document.getElementById("buttonArea");
+const tease=document.getElementById("tease");
+const song=document.getElementById("ourSong");
+const musicButton=document.getElementById("musicButton");
+let noAttempts=0;
+let musicPlaying=false;
+
+function openPage(id){
+ pages.forEach(page=>page.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function toggleMusic(){
+ if(!musicPlaying){
+  try{
+   await song.play();
+   musicPlaying=true;
+   musicButton.textContent="♫ Pause our song";
+  }catch(error){
+   musicButton.textContent="Check song.mp3";
+  }
+ }else{
+  song.pause();
+  musicPlaying=false;
+  musicButton.textContent="♫ Play our song";
+ }
+}
+
+function dodgeNo(){
+ const maxX=Math.max(0,buttonArea.clientWidth-noBtn.offsetWidth);
+ const maxY=Math.max(0,buttonArea.clientHeight-noBtn.offsetHeight);
+ noBtn.style.position="absolute";
+ noBtn.style.left=Math.random()*maxX+"px";
+ noBtn.style.top=Math.random()*maxY+"px";
+ noAttempts++;
+ const messages=[
+  "hehe, too slow, baby! 😚",
+  "are you sureeee? 🥺",
+  "pogi, that button is shy too 😭",
+  "nice try, my love! 💗",
+  "your girl misses youuu 🥹",
+  "the YES button is right there, bebe! 🎀"
+ ];
+ tease.textContent=messages[Math.min(noAttempts-1,messages.length-1)];
+}
+
+noBtn.addEventListener("pointerenter",e=>{
+ if(e.pointerType==="mouse")dodgeNo();
+});
+noBtn.addEventListener("pointerdown",e=>{
+ if(e.pointerType!=="mouse"){
+  e.preventDefault();
+  dodgeNo();
+ }
+});
+noBtn.addEventListener("click",e=>{
+ e.preventDefault();
+ dodgeNo();
+});
+
+function sayYes(){
+ openPage("page3");
+ makeConfetti();
+}
+
+function giveHug(){
+ document.getElementById("hugNote").classList.add("show");
+ makeConfetti();
+}
+
+function unlockReward(){
+ const message=document.getElementById("rewardMessage");
+ message.classList.add("show");
+ const button=document.getElementById("rewardButton");
+ button.textContent="Reward for u, kasi good boy ka";
+ button.disabled=true;
+ makeConfetti();
+ message.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function makeConfetti(){
+ const symbols=["♡","♥","🎀","💕","✿"];
+ for(let i=0;i<45;i++){
+  const item=document.createElement("span");
+  item.className="confetti";
+  item.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  item.style.left=Math.random()*100+"vw";
+  item.style.animationDelay=Math.random()*1.4+"s";
+  item.style.fontSize=(13+Math.random()*18)+"px";
+  document.body.appendChild(item);
+  setTimeout(()=>item.remove(),5000);
+ }
+}
+
+// Spicy YES button moves away when he tries to catch it.
+const spicyYes=document.getElementById("spicyYes");
+const spicyArea=document.getElementById("spicyArea");
+const spicyTease=document.getElementById("spicyTease");
+let spicyAttempts=0;
+
+function dodgeSpicyYes(){
+ const maxX=Math.max(0,spicyArea.clientWidth-spicyYes.offsetWidth);
+ const maxY=Math.max(0,spicyArea.clientHeight-spicyYes.offsetHeight);
+ spicyYes.style.position="absolute";
+ spicyYes.style.left=Math.random()*maxX+"px";
+ spicyYes.style.top=Math.random()*maxY+"px";
+ const messages=[
+  "HAHAHAHA CATCH ME FIRST 😭",
+  "uyyy, are you sure, bebe? 🤭",
+  "NOT SO FAST, POGI 💋",
+  "YOUR LINGLING IS SHY HAHAHAHAHAHHA"
+ ];
+ spicyTease.textContent=messages[Math.min(spicyAttempts,messages.length-1)];
+ spicyAttempts++;
+}
+
+spicyYes.addEventListener("pointerenter",e=>{
+ if(e.pointerType==="mouse")dodgeSpicyYes();
+});
+
+spicyYes.addEventListener("click",()=>{
+ document.getElementById("spicyResult").classList.add("show");
+ spicyYes.style.display="none";
+ spicyTease.textContent="you caught it, baby! 😭💋";
+ makeConfetti();
+});
+
+document.getElementById("spicyNo").addEventListener("click",()=>{
+ spicyTease.textContent="Awww, okay bebe. No pressure, kisses are still available pero ayaw mo talaga:(()). ♡";
+});
+
+// Floating hearts in the background.
+setInterval(()=>{
+ const heart=document.createElement("span");
+ heart.className="floating";
+ heart.textContent=Math.random()>.5?"♡":"♥";
+ heart.style.left=Math.random()*100+"vw";
+ heart.style.fontSize=(13+Math.random()*18)+"px";
+ heart.style.animationDuration=(7+Math.random()*5)+"s";
+ document.body.appendChild(heart);
+ setTimeout(()=>heart.remove(),13000);
+},950);
+</script>
+</body>
+</html>
